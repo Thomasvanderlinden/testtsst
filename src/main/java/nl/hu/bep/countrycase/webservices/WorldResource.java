@@ -55,8 +55,6 @@ public class WorldResource {
                 responseObject.add("message2", "error" + e.getMessage());
 
             }
-            System.out.println(World.getWorld().getAllCountries().toString());
-            System.out.println(World.getWorld().getAllCountries().size());
             return responseObject.build().toString();
 
     }
