@@ -35,11 +35,11 @@ public class WorldResource {
             String continent = jsonObject.getString("continent");
             String capital = jsonObject.getString("capital");
             String region = jsonObject.getString("region");
-            int surface = jsonObject.getInt("surface");
-            int population = jsonObject.getInt("population");
+            int surface = Integer.parseInt(jsonObject.getString("surface"));
+            int population = Integer.parseInt(jsonObject.getString("population"));
             String goverment = jsonObject.getString("government");
-            double lat = Double.valueOf(jsonObject.getString("latitude"));
-            double lng = Double.valueOf(jsonObject.getString("lng"));
+            double lat = Double.parseDouble(jsonObject.getString("latitude"));
+            double lng = Double.parseDouble(jsonObject.getString("longitude"));
 
             Country c = new Country(code, iso3,name, continent, capital, region, surface, population, goverment, lat, lng);
 

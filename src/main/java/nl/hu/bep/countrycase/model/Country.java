@@ -26,6 +26,8 @@ public class Country {
 		this.latitude = lat;
 		this.longitude = lng;
 	}
+	public Country(){}
+
 
 
 	public String getCode() {
