@@ -24,35 +24,40 @@ public class WorldResource {
     public String voegEenLandToe(String JsonBody) {
         JsonObjectBuilder responseObject = Json.createObjectBuilder();
 
+
         try {
             StringReader strReader = new StringReader(JsonBody);
             JsonReader jsonReader = Json.createReader(strReader);
             JsonObject jsonObject = jsonReader.readObject();
 
-            String code = jsonObject.getString("code");
-            String iso3 = jsonObject.getString("iso3");
-            String name = jsonObject.getString("name");
-            String continent = jsonObject.getString("continent");
-            String capital = jsonObject.getString("capital");
-            String region = jsonObject.getString("region");
-            int surface = Integer.parseInt(jsonObject.getString("surface"));
-            int population = Integer.parseInt(jsonObject.getString("population"));
-            String goverment = jsonObject.getString("government");
-            double lat = Double.parseDouble(jsonObject.getString("latitude"));
-            double lng = Double.parseDouble(jsonObject.getString("longitude"));
+            if (World.getWorld().getAllCountries().contains(World.getWorld().getCountryByCode(jsonObject.getString("code")))) {
+                return "dit land bestaat al";
+            } else {
+                String code = jsonObject.getString("code");
+                String iso3 = jsonObject.getString("iso3");
+                String name = jsonObject.getString("name");
+                String continent = jsonObject.getString("continent");
+                String capital = jsonObject.getString("capital");
+                String region = jsonObject.getString("region");
+                int surface = Integer.parseInt(jsonObject.getString("surface"));
+                int population = Integer.parseInt(jsonObject.getString("population"));
+                String goverment = jsonObject.getString("government");
+                double lat = Double.parseDouble(jsonObject.getString("latitude"));
+                double lng = Double.parseDouble(jsonObject.getString("longitude"));
 
-            Country c = new Country(code, iso3,name, continent, capital, region, surface, population, goverment, lat, lng);
+                Country c = new Country(code, iso3, name, continent, capital, region, surface, population, goverment, lat, lng);
 
-            World.getWorld().addCountry(c);
+                World.getWorld().addCountry(c);
 
-            responseObject.add("message1", "land aangemaakt");
-        } catch (Exception e) {
-            responseObject.add("message2", "error" + e.getMessage());
+                responseObject.add("message1", "land aangemaakt");
+            }
+            } catch(Exception e){
+                responseObject.add("message2", "error" + e.getMessage());
 
-        }
-        System.out.println(World.getWorld().getAllCountries().toString());
-        System.out.println(World.getWorld().getAllCountries().size());
-        return responseObject.build().toString();
+            }
+            System.out.println(World.getWorld().getAllCountries().toString());
+            System.out.println(World.getWorld().getAllCountries().size());
+            return responseObject.build().toString();
 
     }
 
